@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AXIOM Pro</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #000;
+      background-image: url('images/axiom.png');
+      background-size: 840px 570px;
+      background-repeat: no-repeat;
+      background-position: center;
+      color: white;
+      width: 840px;
+      height: 570px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 120px;
+      margin-left: 100px;
+    }
+
+    .axiom-logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .axiom-logo span {
+      color: #9090ff;
+      font-size: 16px;
+      vertical-align: top;
+    }
+
+    .title {
+      font-size: 42px;
+      margin-bottom: 9px;
+      margin-left: 30px;
+    }
+
+    .realized-value {
+      background-color: #2FE3AC;
+      color: black;
+      font-size: 52px;
+      font-weight: bold;
+      padding: 6px 6px;
+      border-radius: 0px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+      margin-left: 30px;
+      width: 47%;
+    }
+
+    .sol-logo-large {
+      width: 55px;
+      height: 43px;
+      margin-right: 8px;
+    }
+
+    /* Render the large logo as solid black while keeping transparency */
+    .sol-logo-large.black {
+      filter: brightness(0) saturate(100%);
+    }
+
+    /* Blend white background of JPG into the green bar */
+    .sol-logo-large.remove-white {
+      mix-blend-mode: multiply;
+    }
+
+
+
+
+    .equal {
+      display: inline-block;
+      width: 24px;
+    }
+
+    .equal::before,
+    .equal::after {
+      content: '';
+      display: block;
+      height: 3px;
+      background-color: currentColor;
+      margin: 4px 0;
+    }
+
+    .sol-logo {
+      width: 25px;
+      height: 20px;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
+    .stats {
+      margin-bottom: 40px;
+      width: 42%;
+      margin-left: 50px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .stat-label {
+      font-size: 25px;
+      font-weight: 100;
+      width: 160px;
+    }
+
+    .stat-value {
+      font-size: 25px;
+      display: flex;
+      align-items: center;
+      position: absolute;
+      right: 0;
+      min-width: 120px;
+    }
+
+    .profit {
+      color: #2FE3AC;
+    }
+
+    .footer-section {
+      padding: 0 0px;
+      margin-top: auto;
+      margin-left: 30px;
+    }
+
+    .username {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .username-icon {
+      width: 45px;
+      height: 45px;
+      background-color: #ff9f43;
+      border: 3px solid #ff0000;
+      border-radius: 4px;
+      margin-right: 10px;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .username-icon::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 4px;
+      background-color: #ff0000;
+    }
+
+    .username-icon::after {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 6px solid #ff0000;
+    }
+
+    .username-text {
+      font-size: 27px;
+    }
+
+    .promo {
+      font-size: 18px;
+      color: #ccc;
+      display: flex;
+      align-items: center;
+      margin-bottom: 1000px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .globe-icon {
+      margin-right: 8px;
+      width: 18px;
+      height: 18px;
+      display: inline-block;
+    }
+
+    .download-section {
+      position: absolute;
+      bottom: 70px;
+      right: 20px;
+      z-index: 10;
+    }
+
+    .download-btn {
+      background-color: #9090ff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .download-btn:hover {
+      background-color: #7a7aff;
+    }
+
+    .download-btn:active {
+      transform: translateY(1px);
+    }
+
+    .glass-elements {
+      position: absolute;
+      right: 20px;
+      top: 80px;
+      width: 150px;
+      height: 240px;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    .glass {
+      position: absolute;
+      background-color: rgba(100, 100, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transform: rotate(10deg);
+      border-radius: 8px;
+    }
+
+    .glass-1 {
+      width: 120px;
+      height: 180px;
+      top: 20px;
+      right: 10px;
+      transform: rotate(15deg);
+    }
+
+    .glass-2 {
+      width: 100px;
+      height: 100px;
+      top: 90px;
+      right: 40px;
+      transform: rotate(-15deg);
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="content">
+    <div class="header">
+    </div>
+
+    <div class="title">SPX</div>
+
+    <div class="realized-value">
+      <img src="images/sol-black.png" alt="Solana" class="sol-logo-large" />
+      +322.5
+    </div>
+
+    <div class="stats">
+      <div class="stat-row">
+        <div class="stat-label">PNL</div>
+        <div class="stat-value profit">+198.27%</div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-label">Total Bought</div>
+        <div class="stat-value">
+          <img src="images/sol-colored.png" alt="Solana" class="sol-logo" />2.996
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-label">Total Sold</div>
+        <div class="stat-value">
+          <img src="images/sol-colored.png" alt="Solana" class="sol-logo" />325.5
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="footer-section">
+    <div class="username">
+      <div class="username-icon"></div>
+      <div class="username-text">@hannah100x</div>
+    </div>
+    <div class="promo">
+      <svg class="globe-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none" />
+        <path d="M2 12h20" stroke="white" stroke-width="1" />
+        <path d="M12 2c2.5 2.5 4 6 4 10s-1.5 7.5-4 10" stroke="white" stroke-width="1" fill="none" />
+        <path d="M12 2c-2.5 2.5-4 6-4 10s1.5 7.5 4 10" stroke="white" stroke-width="1" fill="none" />
+      </svg>
+      axiom.trade&nbsp;&nbsp;&nbsp;Save 10% off fees
+    </div>
+  </div>
+
+  <div class="download-section">
+    <button id="downloadBtn" class="download-btn">Download as Image</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    // Function to get URL parameters
+    function getUrlParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // Function to update page content
+    function updatePageContent() {
+      const tokenName = getUrlParameter('tokenName') || 'SPX';
+      const totalBought = getUrlParameter('totalBought') || '2.996';
+      const totalSold = getUrlParameter('totalSold') || '325.5';
+      const realizedValue = getUrlParameter('realizedValue') || '322.5';
+      const pnlPercentage = getUrlParameter('pnlPercentage') || '198.27';
+      const username = getUrlParameter('username') || '@hannah100x';
+      const backgroundImage = getUrlParameter('backgroundImage') || 'axiom.png';
+
+      // Update background image
+      document.body.style.backgroundImage = `url('images/${backgroundImage}')`;
+
+      // Update token name
+      const titleElement = document.querySelector('.title');
+      if (titleElement) {
+        titleElement.textContent = tokenName;
+      }
+
+      // Update realized value
+      const realizedValueElement = document.querySelector('.realized-value');
+      if (realizedValueElement) {
+        realizedValueElement.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = 'images/sol-black.png';
+        img.alt = 'Solana';
+        img.className = 'sol-logo-large';
+        realizedValueElement.appendChild(img);
+        realizedValueElement.appendChild(document.createTextNode(`+${realizedValue}`));
+      }
+
+      // Update PNL percentage
+      const pnlElement = document.querySelector('.stat-value.profit');
+      if (pnlElement) {
+        pnlElement.textContent = `+${pnlPercentage}%`;
+      }
+
+      // Update total bought
+      const totalBoughtElement = document.querySelector('.stat-row:nth-child(2) .stat-value');
+      if (totalBoughtElement) {
+        const solLogo = totalBoughtElement.querySelector('.sol-logo');
+        totalBoughtElement.innerHTML = '';
+        if (solLogo) {
+          totalBoughtElement.appendChild(solLogo);
+        }
+        totalBoughtElement.appendChild(document.createTextNode(totalBought));
+      }
+
+      // Update total sold
+      const totalSoldElement = document.querySelector('.stat-row:nth-child(3) .stat-value');
+      if (totalSoldElement) {
+        const solLogo = totalSoldElement.querySelector('.sol-logo');
+        totalSoldElement.innerHTML = '';
+        if (solLogo) {
+          totalSoldElement.appendChild(solLogo);
+        }
+        totalSoldElement.appendChild(document.createTextNode(totalSold));
+      }
+
+      // Update username
+      const usernameElement = document.querySelector('.username-text');
+      if (usernameElement) {
+        usernameElement.textContent = username;
+      }
+    }
+
+    // Update content when page loads
+    document.addEventListener('DOMContentLoaded', updatePageContent);
+
+    // Download functionality
+    document.getElementById('downloadBtn').addEventListener('click', function () {
+      // Show loading state
+      this.textContent = 'Generating...';
+      this.disabled = true;
+
+      // Hide download button before capture
+      const downloadBtn = document.getElementById('downloadBtn');
+      const originalDisplay = downloadBtn.style.display;
+      downloadBtn.style.display = 'none';
+
+      // Wait a bit for any dynamic content to render
+      setTimeout(() => {
+        html2canvas(document.body, {
+          // Capture fixed canvas matching designed card
+          width: 840,
+          height: 570,
+          x: 0,
+          y: 0,
+          scrollX: 0,
+          scrollY: 0,
+          scale: 2,
+          backgroundColor: '#000000',
+          useCORS: true,
+          allowTaint: true
+        }).then(canvas => {
+          // Convert to blob and download
+          canvas.toBlob(function (blob) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'axiom-trade-result.jpg';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+          }, 'image/jpeg', 0.95);
+        }).finally(() => {
+          // Show download button again and reset button state
+          downloadBtn.style.display = originalDisplay;
+          this.textContent = 'Download as Image';
+          this.disabled = false;
+        });
+      }, 500);
+    });
+  </script>
+</body>
+
+</html>

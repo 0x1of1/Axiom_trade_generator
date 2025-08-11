@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIOM Pro - Trade Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #9090ff;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #ccc;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #9090ff;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #9090ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #7a7aff;
+        }
+
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h1 class="form-title">AXIOM Pro</h1>
+        <form id="tradeForm">
+            <div class="form-group">
+                <label for="tokenName">Token Name:</label>
+                <input type="text" id="tokenName" name="tokenName" value="SPX" required>
+            </div>
+
+            <div class="form-group">
+                <label for="totalBought">Total Bought (SOL):</label>
+                <input type="number" id="totalBought" name="totalBought" step="0.001" required>
+            </div>
+
+            <div class="form-group">
+                <label for="totalSold">Total Sold (SOL):</label>
+                <input type="number" id="totalSold" name="totalSold" step="0.001" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="@username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="backgroundImage">Background Image:</label>
+                <select id="backgroundImage" name="backgroundImage" required>
+                    <option value="axiom.png">Axiom Background</option>
+                    <option value="axiom2.png">Axiom 2 Background</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">Generate Trade Result</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('tradeForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            // Calculate PNL and realized value
+            const totalBought = parseFloat(data.totalBought);
+            const totalSold = parseFloat(data.totalSold);
+
+            // Calculate realized value (difference between sold and bought)
+            const realizedValue = totalSold - totalBought;
+
+            // Calculate PNL percentage
+            const pnlPercentage = totalBought > 0 ? ((realizedValue / totalBought) * 100) : 0;
+
+            // Create result page URL with parameters
+            const params = new URLSearchParams({
+                tokenName: data.tokenName,
+                totalBought: data.totalBought,
+                totalSold: data.totalSold,
+                realizedValue: realizedValue.toFixed(3),
+                pnlPercentage: pnlPercentage.toFixed(2),
+                username: data.username,
+                backgroundImage: data.backgroundImage
+            });
+
+            // Open result page in new tab
+            window.open(`result.html?${params.toString()}`, '_blank');
+        });
+    </script>
+</body>
+
+</html>
