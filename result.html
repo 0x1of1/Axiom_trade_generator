@@ -434,12 +434,13 @@
 
       // Wait a bit for any dynamic content to render
       setTimeout(() => {
-        html2canvas(document.body, {
-          // Capture fixed canvas matching designed card
-          width: 840,
-          height: 570,
-          x: 0,
-          y: 0,
+        const target = document.body;
+        const rect = target.getBoundingClientRect();
+        html2canvas(document.documentElement, {
+          width: Math.round(rect.width),
+          height: Math.round(rect.height),
+          x: Math.round(rect.left + window.scrollX),
+          y: Math.round(rect.top + window.scrollY),
           scrollX: 0,
           scrollY: 0,
           scale: 2,
