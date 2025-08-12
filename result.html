@@ -367,9 +367,9 @@
     // Function to update page content
     function updatePageContent() {
       const tokenName = getUrlParameter('tokenName') || 'SPX';
-      const totalBought = getUrlParameter('totalBought') || '2.996';
-      const totalSold = getUrlParameter('totalSold') || '325.5';
-      const realizedValue = getUrlParameter('realizedValue') || '322.5';
+      const totalBought = getUrlParameter('totalBought') || '0.00';
+      const totalSold = getUrlParameter('totalSold') || '0.00';
+      const realizedValue = getUrlParameter('realizedValue') || '0';
       const pnlPercentage = getUrlParameter('pnlPercentage') || '198.27';
       const username = getUrlParameter('username') || '@hannah100x';
       const backgroundImage = getUrlParameter('backgroundImage') || 'axiom.png';
@@ -409,7 +409,9 @@
         if (solLogo) {
           totalBoughtElement.appendChild(solLogo);
         }
-        totalBoughtElement.appendChild(document.createTextNode(totalBought));
+        // Ensure two decimals when displaying
+        const tb = isNaN(parseFloat(totalBought)) ? '0.00' : parseFloat(totalBought).toFixed(2);
+        totalBoughtElement.appendChild(document.createTextNode(tb));
       }
 
       // Update total sold
@@ -420,7 +422,9 @@
         if (solLogo) {
           totalSoldElement.appendChild(solLogo);
         }
-        totalSoldElement.appendChild(document.createTextNode(totalSold));
+        // Ensure two decimals when displaying
+        const ts = isNaN(parseFloat(totalSold)) ? '0.00' : parseFloat(totalSold).toFixed(2);
+        totalSoldElement.appendChild(document.createTextNode(ts));
       }
 
       // Update username
